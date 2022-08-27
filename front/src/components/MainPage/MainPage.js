@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Icon } from '@iconify/react'
 import { format, addMonths, subMonths } from 'date-fns'
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns'
-import { isSameMonth, isSameDay, addDays, parse } from 'date-fns'
+import { isSameMonth, isSameDay, addDays, parseISO } from 'date-fns'
 import './Mainpage.scss'
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
@@ -66,7 +66,10 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
                             : 'valid'
                     }`}
                     key={day}
-                    onClick={() => onDateClick(parse(cloneDay))}
+                    onClick={() => {
+                        onDateClick(parseISO(cloneDay))
+                        // console.log(`${selectedDate}`)
+                    }}
                 >
                     <span
                         className={
@@ -102,7 +105,9 @@ const MainPage = () => {
         setCurrentMonth(addMonths(currentMonth, 1))
     }
     const onDateClick = (day) => {
+        // day가 Invalid Date라고 뜸, 해결 필요
         setSelectedDate(day)
+        console.log(selectedDate)
     }
     return (
         <div className='calendar'>
