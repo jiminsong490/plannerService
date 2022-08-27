@@ -23,8 +23,6 @@ module.exports = class Plan extends Model {
     }
 
     static associate(db) {
-        db.User.belongsTo(db.User, {
-            sourceKey: 'id',
-        })
+        db.User.belongsTo(db.User)
     }
 }
