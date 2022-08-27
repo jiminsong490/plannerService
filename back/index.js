@@ -16,14 +16,14 @@ app.set('port', process.env.SERVER_PORT || '3005')
 // app.set('view engine','html')
 // app.set('views',path.join(__dirname, 'views'))
 
-// sequelize
-//     .sync({ force: false })
-//     .then(() => {
-//         console.log('데이터베이스 연결 성공')
-//     })
-//     .catch((err) => {
-//         console.error(err)
-//     })
+sequelize
+    .sync({ force: false })
+    .then(() => {
+        console.log('데이터베이스 연결 성공')
+    })
+    .catch((err) => {
+        console.error(err)
+    })
 
 app.use(helmet())
 app.use(morgan('dev'))

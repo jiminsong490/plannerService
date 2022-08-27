@@ -21,19 +21,23 @@ module.exports = class User extends Model {
                     type: DataTypes.STRING(11),
                     allowNull: false,
                 },
-                created_at: {
-                    type: DataTypes.DATE,
+                provider: {
+                    type: DataTypes.STRING(10),
                     allowNull: false,
-                    defaultValue: DataTypes.NOW,
+                    defaultValue: 'local',
+                },
+                snsId: {
+                    type: DataTypes.STRING(30),
+                    allowNull: true,
                 },
             },
             {
                 sequelize,
-                timestamps: false,
+                timestamps: true,
                 underscored: false,
                 modelName: 'User',
                 tableName: 'users',
-                paranoid: false,
+                paranoid: true,
                 charset: 'utf8',
                 collate: 'utf8_general_ci',
             }
@@ -41,13 +45,7 @@ module.exports = class User extends Model {
     }
 
     static associate(db) {
-        db.User.hasMany(db.Group, {
-            foreignKey: 'group',
-            sourceKey: 'id',
-        })
-        db.User.hasMany(db.Plan, {
-            foreignKey: 'plan',
-            sourceKey: 'id',
-        })
+        db.User.hasMany(db.Group)
+        db.User.hasMany(db.Plan)
     }
 }
