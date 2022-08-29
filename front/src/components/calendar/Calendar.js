@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Icon } from '@iconify/react'
 import { format, addMonths, subMonths } from 'date-fns'
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns'
-import { isSameMonth, isSameDay, addDays, parseISO } from 'date-fns'
-import './Mainpage.scss'
+import { isSameMonth, isSameDay, addDays } from 'date-fns'
+import './Calendar.scss'
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
     return (
@@ -67,8 +67,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
                     }`}
                     key={day}
                     onClick={() => {
-                        onDateClick(parseISO(cloneDay))
-                        // console.log(`${selectedDate}`)
+                        onDateClick(cloneDay)
                     }}
                 >
                     <span
@@ -105,9 +104,7 @@ const MainPage = () => {
         setCurrentMonth(addMonths(currentMonth, 1))
     }
     const onDateClick = (day) => {
-        // day가 Invalid Date라고 뜸, 해결 필요
         setSelectedDate(day)
-        console.log(selectedDate)
     }
     return (
         <div className='calendar'>
@@ -126,4 +123,5 @@ const MainPage = () => {
     )
 }
 
+// https://sennieworld.tistory.com/61 참고
 export default MainPage
