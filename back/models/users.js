@@ -10,14 +10,14 @@ module.exports = class User extends Model {
                     unique: true,
                 },
                 password: {
-                    type: DataTypes.STRING(20),
+                    type: DataTypes.STRING(100),
                     allowNull: false,
                 },
                 name: {
                     type: DataTypes.STRING(20),
                     allowNull: false,
                 },
-                phonenumber: {
+                tel: {
                     type: DataTypes.STRING(11),
                     allowNull: false,
                 },

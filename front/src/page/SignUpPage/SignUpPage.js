@@ -9,18 +9,24 @@ class SignUpPage extends Component {
         tel: '',
     }
     handleChange = (e) => {
-        console.log(e.target.value,'change')
         this.setState({
             [e.target.name]: e.target.value,
         })
     }
 
     handleSubmit = async (e) => {
+        const body = this.state
         e.preventDefault()
-        console.log(e.target,'submit')
-        // const res = await fetch('', {
-        //     method: 'post',
-        // })
+        const res = await fetch(
+            `${process.env.REACT_APP_WEBSITE_BACK}/signup`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            }
+        )
     }
     render() {
         return (

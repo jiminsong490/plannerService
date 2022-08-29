@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const LoginPage = () => {
     const handleSubmit = async () => {
-        // const res = await fetch('', {
+        // const res = await fetch(`${process.env.REACT_APP_WEBSITE}/login`, {
         //     method: 'post',
         // })
     }

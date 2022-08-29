@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const path = require('path')
 const morgan = require('morgan')
 const helmet = require('helmet')
@@ -8,16 +9,20 @@ const expressSession = require('express-session')
 const passport = require('passport')
 const { sequelize } = require('./models/index')
 
+const indexRouter = require('./router/index')
+const signUpRouter = require('./router/signUp')
+
 const app = express()
 dotenv.config()
 
-// app.engine('html',require('ejs').renderFile)
 app.set('port', process.env.SERVER_PORT || '3005')
-// app.set('view engine','html')
-// app.set('views',path.join(__dirname, 'views'))
+
+app.engine('html', require('ejs').renderFile)
+app.set('view engine', 'html')
+app.set('views', path.join(__dirname, 'views'))
 
 sequelize
-    .sync({ force: true })
+    .sync({ force: false })
     .then(() => {
         console.log('데이터베이스 연결 성공')
     })
@@ -28,8 +33,12 @@ sequelize
 app.use(helmet())
 app.use(morgan('dev'))
 app.use(express.json())
+app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser(process.env.COOKIE_SECRET))
+
+app.use('/', indexRouter)
+app.use('/signup', signUpRouter)
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`)

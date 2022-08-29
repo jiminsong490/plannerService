@@ -7,7 +7,7 @@ const MainPage = () => {
         <>
             <div>
                 <div>
-                    <Link to={'/planning'}>팀원 확인</Link>
+                    <Link to={'/planning'}>그룹원 확인</Link>
                 </div>
                 <Link to={'/login'}>로그인</Link>
                 <a href='!#'> / </a>
