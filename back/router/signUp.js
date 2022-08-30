@@ -13,5 +13,6 @@ router.post('/', async (req, res, next) => {
         name: req.body.name,
         tel: req.body.tel,
     })
+    console.log(result)
 })
 module.exports = router

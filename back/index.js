@@ -1,16 +1,21 @@
 const express = require('express')
 const cors = require('cors')
+const corsConfig = require('./cors/index')
 const path = require('path')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
+const sessionStore = require('./session/index')
 const passport = require('passport')
+const passportConfig = require('./passport/index')
 const { sequelize } = require('./models/index')
 
 const indexRouter = require('./router/index')
 const signUpRouter = require('./router/signUp')
+const loginRouter = require('./router/login')
+const { session } = require('passport')
 
 const app = express()
 dotenv.config()
@@ -29,16 +34,33 @@ sequelize
     .catch((err) => {
         console.error(err)
     })
+passportConfig()
 
 app.use(helmet())
 app.use(morgan('dev'))
 app.use(express.json())
-app.use(cors())
+app.use(cors(corsConfig))
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser(process.env.COOKIE_SECRET))
+app.use(
+    expressSession({
+        resave: false,
+        saveUninitialized: false,
+        secret: process.env.COOKIE_SECRET,
+        store: sessionStore,
+        cookie: {
+            httpOnly: true,
+            secure: false,
+        },
+        name: 'session: planner',
+    })
+)
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', indexRouter)
 app.use('/signup', signUpRouter)
+app.use('/login', loginRouter)
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`)
