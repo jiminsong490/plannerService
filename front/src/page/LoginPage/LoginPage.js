@@ -15,6 +15,10 @@ const LoginPage = () => {
         setPassword(e.target.value)
     }
 
+    const handleClick = async (e) => {
+        window.location.href = process.env.REACT_APP_GOOGLE_AUTH_URL
+    }
+
     return (
         <>
             <h1>Login</h1>
@@ -38,6 +42,7 @@ const LoginPage = () => {
                 ></StyledInput>
                 <button type='submit'>로그인</button>
             </form>
+            <button onClick={handleClick}>구글 로그인</button>
         </>
     )
 }

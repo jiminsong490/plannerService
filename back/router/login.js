@@ -38,4 +38,20 @@ router
             })
         })(req, res, next)
     })
+router.get(
+    '/google',
+    isNotLoggedIn,
+    passport.authenticate('google', {
+        scope: ['profile', 'email'],
+    })
+)
+router.get(
+    '/google/callback',
+    passport.authenticate('google', isNotLoggedIn, {
+        failureRedirect: `${process.env.WEBSITE_URL}`,
+    }),
+    (req, res) => {
+        res.redirect(`${process.env.WEBSITE_URL}`)
+    }
+)
 module.exports = router

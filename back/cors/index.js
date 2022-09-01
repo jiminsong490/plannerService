@@ -1,6 +1,16 @@
+const express = require('express')
 const dotenv = require('dotenv')
+
 dotenv.config()
-module.exports = {
-    origin: `${process.env.WEBSITE_URL}`,
+const domains = [`${process.env.WEBSITE_URL}`]
+
+const headers = {
+    origin: function (origin, callback) {
+        const isTrue = domains.indexOf(origin) !== -1
+        console.log(isTrue)
+        callback(null, isTrue)
+    },
     credentials: true,
 }
+
+module.exports = headers

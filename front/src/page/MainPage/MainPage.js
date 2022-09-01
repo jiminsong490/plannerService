@@ -39,7 +39,7 @@ const MainPage = () => {
             <div>
                 {userName ? (
                     <div>
-                        <Link to={'/planning'}>그룹원 확인</Link>
+                        <Link to={'/group'}>그룹원 확인</Link>
                         <p>{userName}</p>
                         <button onClick={handleClick}>로그아웃</button>
                     </div>
@@ -52,6 +52,13 @@ const MainPage = () => {
                 )}
             </div>
             <Calendar></Calendar>
+            {userName ? (
+                <button>
+                    <Link to={'/planning'}>일정추가</Link>
+                </button>
+            ) : (
+                <p></p>
+            )}
         </>
     )
 }

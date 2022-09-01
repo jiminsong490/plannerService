@@ -1,5 +1,6 @@
 const passport = require('passport')
 const localStrategy = require('./localStrategy')
+const googleStrategy = require('./googleStrategy')
 const User = require('../models/users')
 
 module.exports = () => {
@@ -24,4 +25,5 @@ module.exports = () => {
         }
     })
     localStrategy()
+    googleStrategy()
 }
