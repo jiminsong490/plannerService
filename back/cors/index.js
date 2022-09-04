@@ -7,7 +7,6 @@ const domains = [`${process.env.WEBSITE_URL}`]
 const headers = {
     origin: function (origin, callback) {
         const isTrue = domains.indexOf(origin) !== -1
-        console.log(isTrue)
         callback(null, isTrue)
     },
     credentials: true,

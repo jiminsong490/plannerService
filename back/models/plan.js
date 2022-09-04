@@ -8,6 +8,10 @@ module.exports = class Plan extends Model {
                     type: DataTypes.STRING(100),
                     allowNull: true,
                 },
+                planName: {
+                    type: DataTypes.STRING(50),
+                    allowNull: false,
+                },
             },
             {
                 sequelize,

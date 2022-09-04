@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import styled from 'styled-components'
 
 const LoginPage = () => {
@@ -16,7 +17,9 @@ const LoginPage = () => {
     }
 
     const handleClick = async (e) => {
-        window.location.href = process.env.REACT_APP_GOOGLE_AUTH_URL
+        // window.location.href = process.env.REACT_APP_GOOGLE_AUTH_URL
+        const a = await axios.get('/login/google')
+        console.log(a)
     }
 
     return (
