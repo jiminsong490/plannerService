@@ -30,6 +30,13 @@ module.exports = class User extends Model {
                     type: DataTypes.STRING(30),
                     allowNull: true,
                 },
+                // UserId: {
+                //     type: DataTypes.INTEGER,
+                //     autoIncrement: true,
+                //     allowNull: false,
+                //     primaryKey: true,
+                //     unique: true,
+                // },
             },
             {
                 sequelize,

@@ -51,6 +51,7 @@ router.get(
         failureRedirect: `${process.env.WEBSITE_URL}`,
     }),
     (req, res) => {
+        console.log(req.params)
         res.redirect(`${process.env.WEBSITE_URL}`)
     }
 )

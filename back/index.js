@@ -16,6 +16,7 @@ const indexRouter = require('./router/index')
 const signUpRouter = require('./router/signUp')
 const loginRouter = require('./router/login')
 const addPlansRouter = require('./router/addPlans')
+const deleteIdRouter = require('./router/deleteId')
 
 const app = express()
 dotenv.config()
@@ -44,7 +45,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use(
     expressSession({
-        resave: false,
+        resave: true,
         saveUninitialized: false,
         secret: process.env.COOKIE_SECRET,
         store: sessionStore,
@@ -62,6 +63,7 @@ app.use('/', indexRouter)
 app.use('/signup', signUpRouter)
 app.use('/login', loginRouter)
 app.use('/addPlans', addPlansRouter)
+app.use('/deleteId', deleteIdRouter)
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`)

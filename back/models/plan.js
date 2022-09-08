@@ -4,9 +4,17 @@ module.exports = class Plan extends Model {
     static init(sequelize) {
         return super.init(
             {
-                planTime: {
+                planDate: {
                     type: DataTypes.STRING(100),
-                    allowNull: true,
+                    allowNull: false,
+                },
+                startTime: {
+                    type: DataTypes.STRING(100),
+                    allowNull: false,
+                },
+                endTime: {
+                    type: DataTypes.STRING(100),
+                    allowNull: false,
                 },
                 planName: {
                     type: DataTypes.STRING(50),

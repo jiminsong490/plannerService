@@ -5,6 +5,7 @@ import SignUpPage from './page/SignUpPage/SignUpPage'
 import PlanningPage from './page/PlanningPage/PlanningPage'
 import Redirect from './components/redirect/Redirect'
 import GroupPage from './page/GroupPage/GroupPage'
+import DeleteId from './page/DeleteIdPage/DeleteIdPage'
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                         path='/google/callback'
                         element={<Redirect />}
                     ></Route>
+                    <Route path='/deleteId' element={<DeleteId />}></Route>
                 </Routes>
             </Router>
         </>

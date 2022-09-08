@@ -42,6 +42,9 @@ const MainPage = () => {
                         <Link to={'/group'}>그룹원 확인</Link>
                         <p>{userName}</p>
                         <button onClick={handleClick}>로그아웃</button>
+                        <button>
+                            <Link to={'/deleteId'}>회원탈퇴</Link>
+                        </button>
                     </div>
                 ) : (
                     <div>
