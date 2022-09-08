@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { route } from '../../../../back/router'
 
 class SignUpPage extends Component {
     state = {
@@ -27,6 +28,8 @@ class SignUpPage extends Component {
                 body: JSON.stringify(body),
             }
         )
+        if (res.success) {
+        }
     }
     render() {
         return (
