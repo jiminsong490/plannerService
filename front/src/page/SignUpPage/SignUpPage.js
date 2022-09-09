@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { route } from '../../../../back/router'
 
 class SignUpPage extends Component {
     state = {

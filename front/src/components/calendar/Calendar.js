@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Icon } from '@iconify/react'
 import { format, addMonths, subMonths } from 'date-fns'
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns'
 import { isSameMonth, isSameDay, addDays } from 'date-fns'
 import './Calendar.scss'
+import DateContext from '../../contexts/contexts'
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
     return (
@@ -94,8 +95,9 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
 }
 
 const MainPage = () => {
+    const { state, action } = useContext(DateContext)
     const [currentMonth, setCurrentMonth] = useState(new Date())
-    const [selectedDate, setSelectedDate] = useState(new Date())
+    const [selectedDate, setSelectedDate] = useState(state.selectedDate)
 
     const prevMonth = () => {
         setCurrentMonth(subMonths(currentMonth, 1))
@@ -104,6 +106,7 @@ const MainPage = () => {
         setCurrentMonth(addMonths(currentMonth, 1))
     }
     const onDateClick = (day) => {
+        action.setSelectedDate(day)
         setSelectedDate(day)
     }
     return (

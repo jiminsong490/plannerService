@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Calendar from '../../components/calendar/Calendar'
+import DateContext from './../../contexts/contexts'
 
 const MainPage = () => {
     const [userName, setUserName] = useState('')
+    const { state } = useContext(DateContext)
     useEffect((e) => {
         async function getUser() {
             const response = await fetch(
@@ -57,7 +59,10 @@ const MainPage = () => {
             <Calendar></Calendar>
             {userName ? (
                 <button>
-                    <Link to={'/planning'}>일정추가</Link>
+                    <Link to={'/planning'} state={{ date: state.selectedDate }}>
+                        {' '}
+                        일정추가
+                    </Link>
                 </button>
             ) : (
                 <p></p>
