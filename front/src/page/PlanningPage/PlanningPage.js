@@ -6,6 +6,8 @@ import { useLocation } from 'react-router-dom'
 const PlanningPage = () => {
     const [start, setStart] = useState('')
     const [end, setEnd] = useState('')
+    const [planName, setPlanName] = useState('')
+
     const location = useLocation()
     const dateObject = location.state?.date
     const year = format(dateObject, 'yyyy')
@@ -19,15 +21,28 @@ const PlanningPage = () => {
         e.preventDefault()
         setEnd(e.target.value)
     }
+    const handleNameChange = (e) => {
+        e.preventDefault()
+        setPlanName(e.target.value)
+    }
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const planDate = dateObject.toString()
         const res = await axios.post(
             `${process.env.REACT_APP_WEBSITE_BACK}/addPlans`,
             {
-                start: start,
-                end: end,
+                startTime: start,
+                endTime: end,
+                planName: planName,
+                planDate: planDate,
+            },
+            {
+                withCredentials: true,
             }
         )
+        if (res.sucess) {
+        }
     }
 
     return (
@@ -50,6 +65,13 @@ const PlanningPage = () => {
                         onChange={handleEndChange}
                         value={end}
                         placeholder='종료 시간'
+                    ></input>
+                </div>
+                <div>
+                    <input
+                        onChange={handleNameChange}
+                        value={planName}
+                        placeholder='계획 이름'
                     ></input>
                 </div>
                 <button type='submit'>제출</button>
