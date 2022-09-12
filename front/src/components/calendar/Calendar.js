@@ -40,7 +40,7 @@ const RenderDays = () => {
     return <div className='days row'>{days}</div>
 }
 
-const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
+const RenderCells = ({ currentMonth, selectedDate, onDateClick, props }) => {
     const monthStart = startOfMonth(currentMonth)
     const monthEnd = endOfMonth(monthStart)
     const startDate = startOfWeek(monthStart)
@@ -80,6 +80,25 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
                     >
                         {formattedDate}
                     </span>
+                    <div>
+                        {props.props
+                            .filter((contact, index) => {
+                                if (
+                                    isSameDay(day, new Date(contact.planDate))
+                                ) {
+                                    return <p key={index}>{contact.planName}</p>
+                                }
+                            })
+                            .map((contact, index) => {
+                                return <p key={index}>{contact.planName}</p>
+                            })}
+
+                        {/* <p>
+                            {isSameDay(day, new Date(props.props[1]?.planDate))
+                                ? props.props[1]?.planName
+                                : 'no'}
+                        </p> */}
+                    </div>
                 </div>
             )
             day = addDays(day, 1)
@@ -94,11 +113,10 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
     return <div className='body'>{rows}</div>
 }
 
-const MainPage = () => {
+const MainPage = (props) => {
     const { state, action } = useContext(DateContext)
     const [currentMonth, setCurrentMonth] = useState(new Date())
     const [selectedDate, setSelectedDate] = useState(state.selectedDate)
-
     const prevMonth = () => {
         setCurrentMonth(subMonths(currentMonth, 1))
     }
@@ -121,6 +139,7 @@ const MainPage = () => {
                 currentMonth={currentMonth}
                 selectedDate={selectedDate}
                 onDateClick={onDateClick}
+                props={props}
             />
         </div>
     )

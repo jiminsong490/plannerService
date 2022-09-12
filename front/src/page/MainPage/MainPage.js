@@ -5,22 +5,22 @@ import DateContext from './../../contexts/contexts'
 
 const MainPage = () => {
     const [userName, setUserName] = useState('')
+    const [plans, setPlans] = useState([])
     const { state } = useContext(DateContext)
-    useEffect((e) => {
-        async function getUser() {
-            const response = await fetch(
-                `${process.env.REACT_APP_WEBSITE_BACK}`,
-                {
-                    // credentials 옵션 지정 안하면 프론트에서 접속해도 로그인 실패
-                    // credentials : 자격 증명을 포함하여 요청하게 해주는 옵션
-                    credentials: 'include',
-                }
-            )
-            const res = await response.json()
-            setUserName(res.name)
-        }
+    useEffect(() => {
         getUser()
-    })
+    }, [])
+
+    const getUser = async () => {
+        const response = await fetch(`${process.env.REACT_APP_WEBSITE_BACK}`, {
+            // credentials 옵션 지정 안하면 프론트에서 접속해도 로그인 실패
+            // credentials : 자격 증명을 포함하여 요청하게 해주는 옵션
+            credentials: 'include',
+        })
+        const res = await response.json()
+        setUserName(res.name)
+        setPlans(res.plans)
+    }
 
     const handleClick = async (e) => {
         const response = await fetch(
@@ -56,7 +56,7 @@ const MainPage = () => {
                     </div>
                 )}
             </div>
-            <Calendar></Calendar>
+            <Calendar props={plans}></Calendar>
             {userName ? (
                 <button>
                     <Link to={'/planning'} state={{ date: state.selectedDate }}>
