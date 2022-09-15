@@ -81,17 +81,20 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick, props }) => {
                         {formattedDate}
                     </span>
                     <div>
-                        {props.props
-                            .filter((contact, index) => {
+                        {props.props ? (
+                            props.props.map((contact, index) => {
                                 if (
-                                    isSameDay(day, new Date(contact.planDate))
+                                    isSameDay(
+                                        cloneDay,
+                                        new Date(contact.planDate)
+                                    )
                                 ) {
                                     return <p key={index}>{contact.planName}</p>
-                                }
+                                } else return null
                             })
-                            .map((contact, index) => {
-                                return <p key={index}>{contact.planName}</p>
-                            })}
+                        ) : (
+                            <p></p>
+                        )}
 
                         {/* <p>
                             {isSameDay(day, new Date(props.props[1]?.planDate))
