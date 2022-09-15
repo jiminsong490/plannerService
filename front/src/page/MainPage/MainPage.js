@@ -57,6 +57,7 @@ const MainPage = () => {
                 )}
             </div>
             <Calendar props={plans}></Calendar>
+
             {userName ? (
                 <button>
                     <Link to={'/planning'} state={{ date: state.selectedDate }}>

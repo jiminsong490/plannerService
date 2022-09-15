@@ -10,7 +10,16 @@ import DeleteId from './page/DeleteIdPage/DeleteIdPage'
 
 function App() {
     return (
-        <>
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '75%',
+                margin: '0 auto',
+            }}
+        >
             <DateProvider>
                 <Router>
                     <Routes>
@@ -30,7 +39,7 @@ function App() {
                     </Routes>
                 </Router>
             </DateProvider>
-        </>
+        </div>
     )
 }
 

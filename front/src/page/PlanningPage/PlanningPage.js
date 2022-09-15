@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { format } from 'date-fns'
 import { useLocation } from 'react-router-dom'
+import Schedule from '../../components/Schedule/Schedule'
 
 const PlanningPage = () => {
     const [start, setStart] = useState('')
@@ -76,6 +77,9 @@ const PlanningPage = () => {
                 </div>
                 <button type='submit'>제출</button>
             </form>
+            <div style={{ width: '50%' }}>
+                <Schedule></Schedule>
+            </div>
         </>
     )
 }
