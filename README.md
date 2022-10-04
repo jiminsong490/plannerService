@@ -4,6 +4,7 @@
 2. 사용한 기술
 - back : express, passport, sequelize | session + cookie  
 - front : react | styeld-components
+- 
 3. 프로젝트 기간 = 22.08.27 ~ xx
 
 4. 기여도 = 100%
